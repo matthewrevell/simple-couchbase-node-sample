@@ -24,8 +24,6 @@ app.get('/', function(req, res){
   res.send(html);
 });
 
-// And now we create a POST route at the same location to handle the form input
-// and save it out to Couchbase
 
 // Run the app on port 3000
 app.listen(3000, function() {
