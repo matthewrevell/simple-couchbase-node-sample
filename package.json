@@ -1,0 +1,15 @@
+{
+  "name": "simple-couchbase-node",
+  "version": "0.0.0",
+  "description": "A very simple CRUD app demonstrating the Couchbase Node SDK",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Matthew Revell",
+  "license": "Apache 2.0",
+  "dependencies": {
+    "couchbase": "^2.0.6",
+    "express": "^4.12.3"
+  }
+}
