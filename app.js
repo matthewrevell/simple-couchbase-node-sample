@@ -1,6 +1,12 @@
+// A very simple demo of putting something into Couchbase using the Node client
+// Matthew Revell, matthew@couchbase.com
+
 // Let's use Express
 var express = require('express');
 var app = express();
+// And bodyParser to handle our form input
+var bodyParser = require('body-parser');
+var urlEncodedParser = bodyParser.urlencoded({ extended: false });
 
 // Now let's connect to Couchbase Server, assuming it's running on localhost
 // and has a bucket named default
@@ -22,6 +28,25 @@ app.get('/', function(req, res){
             '</form>';
 
   res.send(html);
+});
+
+// Now we need to create a route to handle the POST
+app.post('/', urlEncodedParser, function (req, res) {
+  if (!req.body) return res.sendStatus(400);
+
+  // Convert our form input into JSON ready to store in Couchbase
+  var jsonVersion = JSON.stringify(req.body);
+
+  // Save it into Couchbase with keyname user
+  bucket.upsert('user', jsonVersion, function (err, response){
+    if (err) {
+      console.log('Failed to save to Couchbase', err);
+      return;
+    } else {
+      res.send('Saved to Couchbase!');
+    }
+  });
+
 });
 
 
